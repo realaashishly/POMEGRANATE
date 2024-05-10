@@ -13,8 +13,10 @@ tl.to(imageSlider, {
         trigger: imageSlider,
         start: "top bottom",
         end: "+500px",
-        scrub: 1,
-        // pin: true,
-        markers: true
+        scrub: true,
+        // markers: true
       }
 })
+
+
+
