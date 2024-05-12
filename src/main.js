@@ -1,10 +1,7 @@
 gsap.registerPlugin(ScrollTrigger, Draggable)
 
-
-const imageSlider = document.querySelector(".hero__images-wrapper");
-const container = document.querySelector(".hero__work-slider");
+const container = document.querySelector(".hero__images-wrapper");
 const scrollImage = document.querySelector(".image-fill");
-const wrapProgress = gsap.utils.wrap(0, 1);
 
 var boxWidth = scrollImage.clientWidth;
 
@@ -16,11 +13,10 @@ var boxWidth = scrollImage.clientWidth;
 // const sizeOfImage = scrollImage.clientWidth;
 
 let tl = gsap.timeline();
-
-tl.to(imageSlider, {
+tl.to(container, {
     x: "-450px",
     scrollTrigger: {
-        trigger: imageSlider,
+        trigger: container,
         start: "top bottom",
         end: "+500px",
         scrub: true,
@@ -30,11 +26,13 @@ tl.to(imageSlider, {
 
 
 
-Draggable.create(imageSlider, {
+Draggable.create(container, {
   type: "x",
-  bounds: container,
   inertia: true,
-  
+  bounds: { 
+    left: 0,
+    width: 1000,
+  } 
 });
 
 
@@ -44,6 +42,26 @@ function updateProgress() {
       wrapProgress(gsap.getProperty(proxy, "x") / carouselWidth)
     );
 };
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.floating-nav__link');
+
+  const scrollPosition = window.scrollY;
+
+  navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+          // Remove 'active-link' class from all links
+          navLinks.forEach(otherLink => {
+              otherLink.classList.remove('w--current');
+          });
+
+          // Add 'active-link' class to the clicked link
+          link.classList.add('w--current');
+      });
+  });
+});
 
 
 
